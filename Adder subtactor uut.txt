@@ -1,0 +1,65 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    16:41:45 11/24/2022 
+// Design Name: 
+// Module Name:    addsubckt 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module addsubckt(
+input [3:0]a,
+input [3:0]b,
+output reg [3:0]s,
+reg c1,c2,c3,c4,
+input sub
+    );
+wire [3:0]x;
+assign x[0]=b[0]^sub;
+assign x[1]=b[1]^sub;
+assign x[2]=b[2]^sub;
+assign x[3]=b[3]^sub;
+
+always@(sub)
+
+if(sub==1)
+begin
+s[0]=a[0]^x[0]^sub;
+c1= a[0]&x[0]|x[0]&sub|a[0]&sub;
+
+s[1]=a[1]^x[1]^c1;
+ c2= a[1]&x[1]|x[1]&c1|a[1]&c1;
+
+s[2]=a[2]^x[2]^c2;
+ c3= a[2]&x[2]|x[2]&c2|a[2]&c2;
+
+ s[3]=a[3]^x[3]^c3;
+ c4= a[3]&x[3]|x[3]&c3|a[3]&c3;
+end
+else
+begin
+ s[0]=a[0]^b[0]^sub;
+ c1= a[0]&b[0]|b[0]&sub|a[0]&sub;
+
+ s[1]=a[1]^b[1]^c1;
+ c2= a[1]&b[1]|b[1]&c1|a[1]&c1;
+
+ s[2]=a[2]^b[2]^c2;
+ c3= a[2]&b[2]|b[2]&c2|a[2]&c2;
+
+ s[3]=a[3]^b[3]^c3;
+c4= a[3]&b[3]|b[3]&c3|a[3]&c3;
+
+end
+endmodule
